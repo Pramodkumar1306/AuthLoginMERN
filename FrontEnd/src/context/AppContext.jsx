@@ -23,7 +23,6 @@ export const AppContextProvider = (props) => {
             getUserData(res.data); // Pass actual data
             }
         } catch (error) {
-            console.log(error.response?.data || error.message, "error line");
             toast.error(error.message + " Sdff");
         }
         };

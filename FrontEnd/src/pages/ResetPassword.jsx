@@ -65,7 +65,7 @@ export default function ResetPassword() {
               return toast.error("Please enter all 6 digits");
             }
             setOtp(enteredOtp);
-            console.log(otp);
+            
             
             setIsOtpSubmited(true); 
         }
@@ -78,13 +78,7 @@ export default function ResetPassword() {
                 otp,
                 newPassword
               });
-
-              console.log("Email:", email);
-              console.log("OTP:", otp);
-              console.log("New Password:", newPassword);
-              console.log("Response:", res); // Logs full axios response
-              console.log("Success?", res.data.success);
-
+  
               res.data.success
                 ? toast.success(res.data.message)
                 : toast.error(res.data.message);
@@ -92,7 +86,7 @@ export default function ResetPassword() {
               if (res.data.success) navigate('/login');
             } catch (error) {
               toast.error(error.message + " onSubmit");
-              console.error("Reset password error:", error);
+              
             }
           };
 
@@ -108,7 +102,7 @@ export default function ResetPassword() {
 
       {
         !isEmailSent && 
-     
+      
       <form onSubmit={onSubmitEmail} className='bg-slate-900 p-8 rounded-lg shadow-lg w-96' action="">
             <h1 className='text-white text-2xl font-semibold text-center mb-4'>
                 Email To Reset Password  

@@ -7,7 +7,7 @@ const userAuth = async (req, res, next) => {
         return res.json({success:false, message: "Not auth Try Again"});
     }
     
-    // console.log(token);
+    
     try {
         const tokenDecode = jwt.verify(token,process.env.JWT_SECRET);
         if(tokenDecode.id) {
