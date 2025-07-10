@@ -5,22 +5,29 @@ import cookieParser from 'cookie-parser'
 import connectDB from './config/MongoDB.js';
 import authRouter from './routes/AuthRoute.js';
 import userRoute from './routes/UserRoute.js'
-import serverless from 'serverless-http'
 
 const app = express();
-connectDB();
-
+const PORT = process.env.PORT || 4000; 
 const allowedOrigin = ['http://localhost:5173']
-
 app.use(express.json());
 app.use(cookieParser());
-app.use(cors({ origin: allowedOrigin, credentials: true }));
+app.use(cors({origin:allowedOrigin , credentials: true}));
 
-app.get('/', (req, res) => {
-  res.send("API is working");
-});
+const startServer = async () => {
+    await connectDB();
+    //API End Points
+app.get('/',(req,res) => {
+    res.send("Api Is Working")
+})
+app.use('/api/auth',authRouter);
+app.use('/api/user',userRoute);
 
-app.use('/api/auth', authRouter);
-app.use('/api/user', userRoute);
 
-export const handler = serverless(app);
+
+app.listen(PORT,()=> {
+    console.log(`${PORT} Running`)
+})
+
+}
+
+startServer();
