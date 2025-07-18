@@ -50,10 +50,12 @@ export default function EmailVerify() {
                   getUserData();
                   navigate('/')
                 }else {
-                  toast.error(data.message);
+                  toast.error(error.response?.data?.message || error.message || "Something went wrong");
+
                 }
               } catch (error) {
-                toast.error(error.message);
+                toast.error(error.response?.data?.message || error.message || "Something went wrong");
+
               }
           }
       useEffect(() => {

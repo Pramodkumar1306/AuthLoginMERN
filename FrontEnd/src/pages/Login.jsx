@@ -20,26 +20,31 @@ const navigate = useNavigate();
         e.preventDefault(); 
         axios.defaults.withCredentials = true;
         if(state === 'Sign Up') {
-            const {data} = await axios.post(backendUrl + '/api/auth/regester', {name,email,password});
+            const {data} = await axios.post(backendUrl + '/api/auth/regester', {name,email,password},{withCredentials: true});
               if(data.success) {
                 setLogedIn(true);
                 getUserData();
                 navigate('/');
               }else {
-                toast.error(data.message);
+                toast.error(error.response?.data?.message || error.message || "Something went wrong");
+
               }
           }else {
-            const {data} = await axios.post(backendUrl + '/api/auth/login', {email,password});
+            const {data} = await axios.post(backendUrl + '/api/auth/login', {email,password}, {
+      withCredentials: true
+    });
             if(data.success) {
                 setLogedIn(true);
                 getUserData();
                 navigate('/');
               }else {
-                toast.error(data.message);
+                toast.error(error.response?.data?.message || error.message || "Something went wrong");
+
               }
           }
     } catch (error) {
-          toast.error(data.message);  
+          toast.error(error.response?.data?.message || error.message || "Something went wrong");
+
     }
   }
   
